@@ -1,0 +1,243 @@
+<!-- main content -->
+    {% load getvalue %}
+    {% load staticfiles %}
+    <h1 class="text-light" id="contentTitle">{{ cn }}</h1>
+    <a href="#"></a>
+    <!-- description of chaptername -->
+    <p>{{ cndescription }}</p>
+    <hr />
+
+    <!-- main conclusion for chapter with four numbers. -->
+    <div class="grid">
+        <div class="row cells4">
+            <div class="cell">
+                <!-- diagram 1, window 1 -->
+                <div class="window">
+                    <div class="window-caption bg-cyan fg-white">
+                        <span class="window-caption-icon"><span class='mif-chart-dots'></span></span>
+                        <span class="window-caption-title">本地得分</span>
+                    </div>
+                    <div class="window-content" style="height:6.0rem; text-align:center; line-height:6.0rem; font-weight:bold; font-size:4.0rem;">
+                        {{ cvs|getListValue:0 }}
+                    </div>
+                </div>
+            </div>
+            <div class="cell">
+                <!-- diagram 1, window 2 -->
+                <div class="window">
+                    <div class="window-caption bg-cyan fg-white">
+                        <span class="window-caption-icon"><span class='mif-chart-dots'></span></span>
+                        <span class="window-caption-title">历史最高</span>
+                    </div>
+                    <div class="window-content" style="height:6.0rem; text-align:center; line-height:6.0rem; font-weight:bold; font-size:4.0rem;">
+                        {{ cvs|getListValue:1 }}
+                    </div>
+                </div>
+            </div>
+            <div class="cell">
+                <!-- diagram 1, window 3 -->
+                <div class="window">
+                    <div class="window-caption bg-cyan fg-white">
+                        <span class="window-caption-icon"><span class='mif-chart-dots'></span></span>
+                        <span class="window-caption-title">地区平均</span>
+                    </div>
+                    <div class="window-content" style="height:6.0rem; text-align:center; line-height:6.0rem; font-weight:bold; font-size:4.0rem;">
+                        {{ cvs|getListValue:2 }}
+                    </div>
+                </div>
+            </div>
+            <div class="cell">
+                <!-- diagram 1, window 4 -->
+                <div class="window">
+                    <div class="window-caption bg-cyan fg-white">
+                        <span class="window-caption-icon"><span class='mif-chart-dots'></span></span>
+                        <span class="window-caption-title">地区最高</span>
+                    </div>
+                    <div class="window-content" style="height:6.0rem; text-align:center; line-height:6.0rem; font-weight:bold; font-size:4.0rem;">
+                        {{ cvs|getListValue:3 }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- for webapi -->
+    <script type="text/javascript">
+        var rn = {{ region }};
+        var rns = {{ REGION }};
+        var sn = {{ section }};
+        var cr = {{ chapter }};
+        var uid = {{ uid }};
+    </script>
+
+    <!-- timeline analyse -->
+    <div class="row" style="background-color:#0050ef; color:#FFFFFF; height:2.0rem; line-height:2.0rem; text-align:center; font-size:1.0rem; margin-bottom:1.0rem; margin-top:3.0rem;">
+        <a name="p1"></a>{{ cn }}随时间变化的趋势
+    </div>
+
+    <div class="grid">
+        <div class="row cells3">
+            <!-- timeline diagram on the left -->
+            <div class="cell colspan2"  style="height:24.0rem;" id="c0101"></div>
+            <script type="text/javascript" src="{% static 'diagram/c0101.js' %}"></script>
+            <script type="text/javascript">
+                var lineChart = echarts.init(document.getElementById('c0101'),'macarons');
+                lineChart.setOption(optionc0101);
+            </script>
+            <!-- text on the right -->
+            <div class="cell">
+                <div class="row">
+                    <div class="window">
+                        <div class="window-caption bg-green fg-white">
+                            <span class="window-caption-title">图表解读</span>
+                        </div>
+                        <div class="window-content" style="height:6.0rem; overflow:auto; overflow-y:auto;"><p>{{ con|getDictValue:"c0101" }}</p></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="window">
+                        <div class="window-caption bg-olive fg-white">
+                            <span class="window-caption-title">原始数据</span>
+                        </div>
+                        <div class="window-content" style="height:14.0rem; overflow:auto; overflow-y:auto;">
+                            <table class="table striped hovered border bordered">
+                                <thead>
+                                    <tr>
+                                        <td >时间</td>
+                                        <td >得分</td>
+                                        <td >同比</td>
+                                        <td >环比</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for table in tbv|getDictValue:"c0101" %}
+                                    <tr>
+                                        <td>{{ table|getListValue:0 }}</td>
+                                        <td>{{ table|getListValue:1 }}</td>
+                                        <td>{{ table|getListValue:2 }}</td>
+                                        <td>{{ table|getListValue:3 }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- sub-elements analyse -->
+    <div class="row" style="background-color:#0050ef; color:#FFFFFF; height:2.0rem; line-height:2.0rem; text-align:center; font-size:1.0rem; margin-bottom:1.0rem; margin-top:3.0rem;">
+        <a name="p2"></a>{{ cn }}的组成要素
+    </div>
+
+    <div class="grid">
+        <div class="row cells3">
+            <!-- timeline diagram on the left -->
+            <div class="cell colspan2"  style="height:24.0rem;" id="c0201"></div>
+            <script type="text/javascript" src="{% static 'diagram/c0201.js' %}"></script>
+            <script type="text/javascript">
+                var lineChart = echarts.init(document.getElementById('c0201'),'macarons');
+                lineChart.setOption(optionc0201);
+            </script><!-- text on the right -->
+            <div class="cell">
+                <div class="row">
+                    <div class="window">
+                        <div class="window-caption bg-green fg-white">
+                            <span class="window-caption-title">图表解读</span>
+                        </div>
+                        <div class="window-content" style="height:6.0rem; overflow:auto; overflow-y:auto;"><p>{{ con|getDictValue:"c0201" }}</p></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="window">
+                        <div class="window-caption bg-olive fg-white">
+                            <span class="window-caption-title">原始数据</span>
+                        </div>
+                        <div class="window-content" style="height:14.0rem; overflow:auto; overflow-y:auto;">
+                            <table class="table striped hovered border bordered">
+                                <thead>
+                                    <tr>
+                                        <td >时间</td>
+                                        <td >得分</td>
+                                        <td >同比</td>
+                                        <td >环比</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for table in tbv|getDictValue:"c0201" %}
+                                    <tr>
+                                        <td>{{ table|getListValue:0 }}</td>
+                                        <td>{{ table|getListValue:1 }}</td>
+                                        <td>{{ table|getListValue:2 }}</td>
+                                        <td>{{ table|getListValue:3 }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- sub-regions analyse -->
+    <div class="row" style="background-color:#0050ef; color:#FFFFFF; height:2.0rem; line-height:2.0rem; text-align:center; font-size:1.0rem; margin-bottom:1.0rem; margin-top:3.0rem;">
+        <a name="p3"></a>{{ cn }}随时间变化的趋势
+    </div>
+
+    <div class="grid">
+        <div class="row cells3">
+            <!-- timeline diagram on the left -->
+            <div class="cell colspan2"  style="height:24.0rem;" id="c0301"></div>
+            <script type="text/javascript" src="{% static 'diagram/c0301.js' %}"></script>
+            <script type="text/javascript">
+                var lineChart = echarts.init(document.getElementById('c0301'),'macarons');
+                lineChart.setOption(optionc0301);
+            </script>
+            <!-- text on the right -->
+            <div class="cell">
+                <div class="row">
+                    <div class="window">
+                        <div class="window-caption bg-green fg-white">
+                            <span class="window-caption-title">图表解读</span>
+                        </div>
+                        <div class="window-content" style="height:6.0rem; overflow:auto; overflow-y:auto;"><p>{{ con|getDictValue:"c0301" }}</p></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="window">
+                        <div class="window-caption bg-olive fg-white">
+                            <span class="window-caption-title">原始数据</span>
+                        </div>
+                        <div class="window-content" style="height:14.0rem; overflow:auto; overflow-y:auto;">
+                            <table class="table striped hovered border bordered">
+                                <thead>
+                                    <tr>
+                                        <td >时间</td>
+                                        <td >得分</td>
+                                        <td >同比</td>
+                                        <td >环比</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for table in tbv|getDictValue:"c0301" %}
+                                    <tr>
+                                        <td>{{ table|getListValue:0 }}</td>
+                                        <td>{{ table|getListValue:1 }}</td>
+                                        <td>{{ table|getListValue:2 }}</td>
+                                        <td>{{ table|getListValue:3 }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- main content -->

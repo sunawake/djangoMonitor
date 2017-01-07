@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="author" content="Suyang"/>
+    <meta name="generator" content="Visual Studio Code"/>
+
+    {% load staticfiles %}
+    <!-- Thanks for Metro CSS UI (http://metroui.org.ua/) -->
+    <link href="{% static 'libmetro/css/metro.css' %}" rel="stylesheet" />
+    <link href="{% static 'libmetro/css/metro-responsive.css' %}" rel="stylesheet" />
+    <link href="{% static 'libmetro/css/metro-icons.css' %}" rel="stylesheet" />
+    
+    <link href="{% static 'analyse/analyse.css' %}" rel="stylesheet" />
+
+    <script src="{% static 'libmetro/js/jquery-2.2.2.min.js' %}"></script>
+    <script src="{% static 'libmetro/js/metro.js' %}"></script>
+    
+    <script src="{% static 'libecharts/echarts.min.js' %}"></script>
+    <script src="{% static 'libecharts/echarts.theme.macarons.js' %}"></script>
+
+    <title>数据分析页面</title>
+</head>
+<body>
+    <!-- top app bar -->
+    <div class="app-bar fixed-top navy" data-role="appbar"><!-- users may have access to color -->
+        <!-- appbar left -->
+        <!-- menu items -->
+        <ul class="app-bar-menu">
+            <!-- main menu -->
+            <li><a href="#">旅游监控平台</a></li>
+            <span class="app-bar-divider"></span>
+            <!-- to grade page -->
+            <li><a href="/monitor/index">综合评价</a></li>
+            <li><a href="/monitor/analyse">数据分析</a></li>
+            <li><a href="/monitor/railway">道路监控</a></li>
+            <li><a href="/monitor/tourists">景区客流</a></li>
+            <li><a href="/monitor/comments">社会舆论</a></li>
+        </ul>
+    </div>
+    <!-- sidebar -->
+    <div class="sidebarM">
+        <ul class="v-menu mine subdown">
+            {% load getvalue %}
+            <!-- section -->
+            {% for secAnchor in SIDEBAR|getDictKeys %}
+            <li class="menu-title">{{ SIDEBAR|getDictValue:secAnchor|getDictValue:"name" }}</li>
+                <!-- chapter -->
+                {% for chaAnchor in SIDEBAR|getDictValue:secAnchor|getDictValue:"chapter"|getDictKeys %}
+                <li>
+                    <a href="/monitor/analyse/{{ secAnchor }}{{ chaAnchor }}">
+                        {{ SIDEBAR|getDictValue:secAnchor|getDictValue:"chapter"|getDictValue:chaAnchor|getDictValue:"name" }}
+                    </a>
+                </li>
+                <li class="divider"></li>
+                {% endfor %}
+            {% endfor %}
+            <li><a href="#"></a></li>
+        </ul>
+    </div>
+    <!-- main content -->
+    <div style="margin-left:13.0rem; padding-top:4.0rem; padding-right:3.0rem;">
+        {% include 'diagram.html' %}
+    </div>
+    <!-- quick access -->
+    <div style="position:fixed; bottom:2.0rem; left:10.0rem;">
+        <ul class="t-menu compact">
+            <li><a href="#" title="返回页首"><span class="icon mif-home"></span></a></li>
+            <li><a href="#" class="dropdown-toggle"><span class="icon mif-compass"></span></a>
+                <ul class="t-menu horizontal compact" data-role="dropdown">
+                    <li><a href="#p1">
+                        <span data-role="hint" data-hint="时间走势" data-hint-position="top">
+                            <span class="icon mif-chart-line"></span>
+                        </span>
+                    </a></li>
+                    <li><a href="#p2">
+                        <span data-role="hint" data-hint="下级单位" data-hint-position="top">
+                            <span class="icon mif-chart-bars"></span>
+                        </span>
+                    </a></li>
+                    <li><a href="#p3">
+                        <span data-role="hint" data-hint="组成要素" data-hint-position="top">
+                            <span class="icon mif-chart-pie"></span>
+                        </span>
+                    </a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- tell users to max their browser window -->
+    <script type="text/javascript" src="{% static 'analyse/experience.js' %}"></script>
+</body>
+</html>
