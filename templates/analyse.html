@@ -21,7 +21,7 @@
     <script src="{% static 'libecharts/echarts.min.js' %}"></script>
     <script src="{% static 'libecharts/echarts.theme.macarons.js' %}"></script>
 
-    <title>数据分析页面</title>
+    <title>DATA ANALYSE</title>
 </head>
 <body>
     <!-- top app bar -->
@@ -30,14 +30,13 @@
         <!-- menu items -->
         <ul class="app-bar-menu">
             <!-- main menu -->
-            <li><a href="#">旅游监控平台</a></li>
+            <li><a href="#">Monitor</a></li>
             <span class="app-bar-divider"></span>
             <!-- to grade page -->
-            <li><a href="/monitor/index">综合评价</a></li>
-            <li><a href="/monitor/analyse">数据分析</a></li>
-            <li><a href="/monitor/railway">道路监控</a></li>
-            <li><a href="/monitor/tourists">景区客流</a></li>
-            <li><a href="/monitor/comments">社会舆论</a></li>
+            <li><a href="/monitor/index">INDEX</a></li>
+            <li><a href="/monitor/analyse">DATA ANALYSE</a></a></li>
+            <li><a href="/monitor/road">ROAD MONITOR</a></li>
+            <li><a href="/monitor/comments">COMMENT</a></li>
         </ul>
     </div>
     <!-- sidebar -->
@@ -67,21 +66,21 @@
     <!-- quick access -->
     <div style="position:fixed; bottom:2.0rem; left:10.0rem;">
         <ul class="t-menu compact">
-            <li><a href="#" title="返回页首"><span class="icon mif-home"></span></a></li>
+            <li><a href="#" title="TOP"><span class="icon mif-home"></span></a></li>
             <li><a href="#" class="dropdown-toggle"><span class="icon mif-compass"></span></a>
                 <ul class="t-menu horizontal compact" data-role="dropdown">
                     <li><a href="#p1">
-                        <span data-role="hint" data-hint="时间走势" data-hint-position="top">
+                        <span data-role="hint" data-hint="TIME TREND" data-hint-position="top">
                             <span class="icon mif-chart-line"></span>
                         </span>
                     </a></li>
                     <li><a href="#p2">
-                        <span data-role="hint" data-hint="下级单位" data-hint-position="top">
+                        <span data-role="hint" data-hint="DEPARTMENTS" data-hint-position="top">
                             <span class="icon mif-chart-bars"></span>
                         </span>
                     </a></li>
                     <li><a href="#p3">
-                        <span data-role="hint" data-hint="组成要素" data-hint-position="top">
+                        <span data-role="hint" data-hint="ELEMENTS" data-hint-position="top">
                             <span class="icon mif-chart-pie"></span>
                         </span>
                     </a></li>
